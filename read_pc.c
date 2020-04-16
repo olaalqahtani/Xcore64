@@ -216,6 +216,11 @@ static void parse_options(int argc, char **argv){
         case 't':
             options.prstatus=1;
             break;
+              // Ola
+		case 'a':
+			options.auxv = 1;
+			break;
+		// Ola
         default:
             usage();
         }
@@ -596,6 +601,11 @@ static void check_file(const void *mp){
         die("Not a core file");
     }
 }
+//Ola
+static void print_auxv(const elf_prstatus_t *prs){
+	
+}
+//Ola
 /*
   Get and print the pc of a core dump. Assumes an x86_64 linux core file. 
 */
@@ -634,6 +644,11 @@ int main(int argc, char **argv){
     if(options.segments){
         print_segments(mp);
     }
+   //Ola
+	if(options.auxv){
+		print_auxv(mp);
+	}
+	//Ola
     assert(prs!=0);
     Munmap(mp,len);
     close(fd);
